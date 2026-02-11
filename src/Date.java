@@ -20,7 +20,6 @@ public class Date implements Comparable<Date>{
     }
 
     public boolean isValid() {
-        //08/03/2005
         // checking year
         if (year > 2026 || year <= 0) {
             return false;
@@ -34,39 +33,22 @@ public class Date implements Comparable<Date>{
             return false;
         }
         // checking feb
-        if (month == 2){
-            if (isLeap() && day > 28){
+        if (month == 2) {
+            if (isLeap(year) && day > 29) {
                 return false;
+            } else {
+                return day <= 28;
             }
         }
-
-
-
-
-
-
-        if (year <= 2026 && year > 0) {
-            // move onto validating months
-            if (month <= MONTHS && month >= 1) {
-                // move onto validating days
-                if (day <= 31 && day >= 1) {
-                    // move onto checking for leap year
-                    if (isLeap(year) && month == FEB && day > DAYSINLEAPFEB) {
-                        return false;
-                    }
-                    for (int n:MONTHS30DAYS) {
-                        if (n == month){
-                            if (day > 30) {
-                                return false;
-                            } else {
-                                return true;
-                            }
-                        }
-                    }
-
-                }
+        // checking months w 30 days
+        for (int n : MONTHS30DAYS) {
+            if (n == month) {
+                return day <= 30;
             }
         }
+        // for months w 31 days, all other conditions checked:
+        return day <= 31;
+
     }
 
     public boolean isLeap(int year){
@@ -78,5 +60,4 @@ public class Date implements Comparable<Date>{
             } else { return true; }
         } else { return false; }
     }
-
 }
