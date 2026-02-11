@@ -20,10 +20,16 @@ public class Date implements Comparable<Date>{
     }
 
     public boolean isValid() {
-        // checking year
+        // checking year & 16 or older
         if (year > 2026 || year <= 0) {
             return false;
         }
+        //checking age > 16
+        if ( 2026 - year < 16){
+            return false;
+        }
+        if (year == 2010){
+            if((month > 2) || (month == 2 && day > 11)){ return false; }
         // checking month
         if (month > 12 || month <= 0) {
             return false;

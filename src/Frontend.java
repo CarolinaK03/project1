@@ -35,40 +35,58 @@ public class Frontend {
         }
     }
 
-    public void addStudent(){
+    public void addStudent() {
         system.out.println("Please enter the first name, last name, date of birth mm/dd/yyyy, major, and number of completed credits.");
         // Read all data tokens and store them temporarily.
-        // If token is not accurate, remove it from that variable and ask again
-        // once all are checked and validated, constuct a student profile
-        // construct a student
-        // add student to student list
+        // If token is not accurate, return
+        // Once all are checked and validated, construct a student profile
+        // Construct a student
+        // Add student to student list
 
-        int i = 0;
-            while (i< args.length) {
-                string tempFName = arg[0];
-                string tempLName = arg[1];
+        // Names
+        string tempFName = args[0];
+        string tempLName = args[1];
 
-                // creating temporary date to insert later
-                string tempDateStr = arg[2];
-                string[] dateParts = tempdateStr.split("/");
-                int month = Integer.parseInt(dateParts[0]);
-                int day = Integer.parseInt(dateParts[1]);
-                int year = Integer.parseInt(dateParts[2]);
-                // validating date
-                Date tempDate = new Date(month,day,year);
-                while(!tempdate.isValid()){
+        // Date
+        string tempDateStr = args[2];
+        string[] dateParts = tempDateStr.split("/");
+        int month = Integer.parseInt(String.valueOf(dateParts[0]));
+        int day = Integer.parseInt(String.valueOf(dateParts[1]));
+        int year = Integer.parseInt(String.valueOf(dateParts[2]));
 
-                }
-                // removing or finalizing date
+        Date tempDate = new Date(month, day, year);
+        if (!tempdate.isValid()) {
+            system.out.println("Date of birth is invalid");
+            return;
+        }
 
-                string major = arg[3];
-                int tempCredits = arg[4]
+        // Major
+        Major major = checkMajor(args[3]);
+        if (major == null) {
+            system.out.println("Major is invalid. Major must be CS, ECE, MATH, ITI or BAIT");
+            return;
+        }
 
+        //Credits
+        int tempCredits = Integer.parseInt(args[4]);
+        if (tempCredits < 0) {
+            system.out.println("Credits must be greater than 0");
+            return;
+        }
 
-
-
-            }
-
-
+        //
+         // ADD FUNCTIONALITY TO ADD STUDENT
+        //
     }
+
+
+    public static Major checkMajor(String input){
+        try {
+            return Major.valueOf(input.toUpperCase());
+        } catch(IllegalArgumentException e) {
+            return null;
+        }
+    }
+
 }
+
