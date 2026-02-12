@@ -1,4 +1,4 @@
-public class Date implements Comparable<Date>{
+public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
@@ -6,14 +6,14 @@ public class Date implements Comparable<Date>{
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUARTERCENTENNIAL = 400;
-    //public static final int JAN = Calendar.JANUARY + 1;//Calendar.JANUARY is 0
     public static final int MAXDAYSINAMONTH = 31;
     public static final int MONTHS = 12;
     public static final int DAYSINAMONTH = 30;
     public static final int DAYSINLEAPFEB = 28;
     public static final int FEB = 2;
-    public static final int[] MONTHS30DAYS = {2,4,5,9,11};
-    public Date(int month, int day, int year){
+    public static final int[] MONTHS30DAYS = {2, 4, 5, 9, 11};
+
+    public Date(int month, int day, int year) {
         this.month = month;
         this.day = day;
         this.year = year;
@@ -25,45 +25,86 @@ public class Date implements Comparable<Date>{
             return false;
         }
         //checking age > 16
-        if ( 2026 - year < 16){
+        if (2026 - year < 16) {
             return false;
         }
-        if (year == 2010){
-            if((month > 2) || (month == 2 && day > 11)){ return false; }
+        if (year == 2010) {
+            if ((month > FEB) || (month == FEB && day > 11)) {
+                return false;
+            }
+        }
         // checking month
-        if (month > 12 || month <= 0) {
+        if (month > MONTHS || month <= 0) {
             return false;
         }
         // checking day
-        if (day < 1 || day > 31) {
+        if (day < 1 || day > MAXDAYSINAMONTH) {
             return false;
         }
         // checking feb
-        if (month == 2) {
+        if (month == FEB) {
             if (isLeap(year) && day > 29) {
                 return false;
             } else {
-                return day <= 28;
+                return day <= DAYSINLEAPFEB;
             }
         }
         // checking months w 30 days
         for (int n : MONTHS30DAYS) {
             if (n == month) {
-                return day <= 30;
+                return day <= DAYSINAMONTH;
             }
         }
         // for months w 31 days, all other conditions checked:
-        return day <= 31;
-
+        return day <= MAXDAYSINAMONTH;
     }
 
-    public boolean isLeap(int year){
-        if (year % QUADRENNIAL == 0){
-            if(year % CENTENNIAL == 0){
-                if(year % QUARTERCENTENNIAL == 0){
+    public boolean isLeap ( int year){
+        if (year % QUADRENNIAL == 0) {
+            if (year % CENTENNIAL == 0) {
+                if (year % QUARTERCENTENNIAL == 0) {
                     return true;
-                } else { return false; }
-            } else { return true; }
-        } else { return false; }
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int compareTo (Date other){
+        int compareMonth = this.month.compareTo(other.month); //returns -1,0,1
+        if (compareMonth != 0) {
+            return compareMonth;
+        }
+
+        // after compare by first names
+        int compareDay = this.day.compareTo(other.day);
+        if (compareDay != 0) {
+            return compareDay;
+        }
+
+        int compareYear = this.year.compareTo(other.year);
+        if (compareYear != 0) {
+            return compareYear;
+        }
+    }
+
+    @Override
+    public String toString () {
+        return month + "/" + day + "/" + year + "/";
+    }
+
+    @Override
+    public boolean equals(Object Obj) {
+        if (obj instanceof Date) {
+            Date other = (Date) obj;
+            return day == other.day && month == other.month && year == other.year;
+        }
+        else return false;
     }
 }

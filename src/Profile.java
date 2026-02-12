@@ -32,10 +32,10 @@ public class Profile implements Comparable<Profile>{
     }
 
     @Override
-    public boolean equals(){
+    public boolean equals(Object obj){
         if (obj instanceof Profile){
             Profile other = (Profile) obj;
-            return fname.equals(other.fname) && lname.equals(other,lname) && dob.equals(other.dob);
+            return fname.equals(other.fname) && lname.equals(other.lname) && dob.equals(other.dob);
         }
     }
 }
