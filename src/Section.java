@@ -30,6 +30,15 @@ roster = new Student[4];
 
 }
 
+public boolean isEmpty(){
+    boolean emp = (numStudents == 0);
+    return emp;
+}
+
+public Instructor getInstructor(){
+    return instructor;
+}
+
 public Course getCourse(){
     return course;
 }
