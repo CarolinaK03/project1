@@ -11,6 +11,22 @@ numSections = 0;
 
 
 }
+
+public Section getInd(int ind){
+    return sections[ind];
+    
+}
+
+
+public int getSize(){
+    
+    return numSections;
+
+}
+
+
+
+
 private int find(Section section) {
     for(int i = 0; i < numSections; i++){
         
