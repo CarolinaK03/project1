@@ -1,15 +1,14 @@
 public class Frontend {
-    Studentlist list = new StudentList();
+    StudentList list = new StudentList();
 
     public void run(String[] args){
-        system.out.println("Registration system is running.");
+        System.out.println("Registration system is running.");
         int i = 0;
         while (i< args.length){
             String command = args[i];
             if (command.equals("A")){
                 System.out.println("Please enter the first name, last name, date of birth mm/dd/yyyy, major, and number of completed credits.");
                 addStudent(args);
-                // fill out later
             }
             else if (command.equals("R")){
                 // fill out later
@@ -37,14 +36,6 @@ public class Frontend {
     }
 
     public void addStudent(String[] args) {
-        /*
-         Read all data tokens and store them temporarily.
-         If token is not accurate, return
-         Once all are checked and validated, construct a student profile
-         Construct a student
-         Add student to student list
-        */
-
         // Names
         String tempFName = args[1];
         String tempLName = args[2];
@@ -55,7 +46,6 @@ public class Frontend {
         int month = Integer.parseInt(String.valueOf(dateParts[0]));
         int day = Integer.parseInt(String.valueOf(dateParts[1]));
         int year = Integer.parseInt(String.valueOf(dateParts[2]));
-
         Date tempDate = new Date(month, day, year);
         if (!tempDate.isValid()) {
             System.out.println("Date of birth is invalid");
@@ -80,10 +70,7 @@ public class Frontend {
         Profile studProfile = new Profile(tempFName, tempLName, tempDate);
         Student stud = new Student(studProfile, major, tempCredits);
         list.add(stud);
-         // ADD FUNCTIONALITY TO ADD STUDENT
-        //
     }
-
 
     public static Major checkMajor(String input){
         try {

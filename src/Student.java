@@ -1,9 +1,9 @@
 public class Student implements Comparable<Student> {
-    private Profile profile;
-    private Major major;
-    private int credits;
+    private final Profile profile;
+    private final Major major;
+    private final int credits;
 
-    // Constuctor
+    // Constructor
     public Student(Profile profile, Major major, int credits) {
         this.profile = profile;
         this.major = major;
@@ -14,18 +14,20 @@ public class Student implements Comparable<Student> {
         if (credits < 30) {
             return "Freshman";
         } else if (credits < 60) {
-            return "Freshman";
+            return "Sophomore";
         } else if (credits < 90) {
             return "Junior";
         } else if (credits > 90) {
             return "Senior";
         }
-        return "";
+        return "Senior";
     }
 
     //override methods
     @Override
     public int compareTo(Student other) {
+
+        /*
         int compareProfile = this.profile.compareTo(other.profile); //returns -1,0,1
         if (compareProfile != 0) {
             return compareProfile;
@@ -40,24 +42,22 @@ public class Student implements Comparable<Student> {
         if (compareCredits != 0) {
             return compareCredits;
         }
+        */
+        return this.profile.compareTo(other.profile);
 
-        return 0;
     }
 
     @Override
     public String toString() {
-        return "[" + profile.getfname() + " " + profile.getlname() + " " + profile.getdob() + " " + "[" + major + "," + major.getSchool()
-                + "] credits earned: " + "[" + student.classIdentifier + "]";
+        return "[" + profile.getfname() + " " + profile.getlname() + " " + profile.getdob() + " [" + major + "," + major.getSchool()
+                + "] credits earned: [" + classIdentifier(credits) + "]";
     }
 
     @Override
-    public boolean equals(Object Obj) {
-        if (!(obj instanceof Student)) return false;
-
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Student other)) return false;
         if (this == obj) return true;
 
-        return this.student.equals(other.student);
+        return this.profile.equals(other.profile);
     }
-}
-
 }

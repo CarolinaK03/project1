@@ -37,10 +37,10 @@ public class StudentList {
     }
 
 
-    } //add to end of array
+    //add to end of array
     public void remove(Student student) {
         int ind = find(student);
-        if (ind = NOT_FOUND) { return; }
+        if (ind == NOT_FOUND) { return; }
 
         list[ind] = list[size - 1];
         list[size-1] = null;
