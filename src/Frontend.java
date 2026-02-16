@@ -1,14 +1,14 @@
 public class Frontend {
-    // Valid commands:A R O C E D P Q
+    Studentlist list = new StudentList();
+
     public void run(String[] args){
         system.out.println("Registration system is running.");
-        // 40 line max
-        // loop through the amount of args, to catch each arg and perform its function.
         int i = 0;
         while (i< args.length){
             String command = args[i];
             if (command.equals("A")){
-                addStudent();
+                System.out.println("Please enter the first name, last name, date of birth mm/dd/yyyy, major, and number of completed credits.");
+                addStudent(args);
                 // fill out later
             }
             else if (command.equals("R")){
@@ -32,11 +32,11 @@ public class Frontend {
             else if (command.equals("Q")){
                 // fill out later
             }
+            i++;
         }
     }
 
     public void addStudent(String[] args) {
-        system.out.println("Please enter the first name, last name, date of birth mm/dd/yyyy, major, and number of completed credits.");
         /*
          Read all data tokens and store them temporarily.
          If token is not accurate, return
@@ -79,6 +79,7 @@ public class Frontend {
         //
         Profile studProfile = new Profile(tempFName, tempLName, tempDate);
         Student stud = new Student(studProfile, major, tempCredits);
+        list.add(stud);
          // ADD FUNCTIONALITY TO ADD STUDENT
         //
     }
