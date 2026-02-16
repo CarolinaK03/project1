@@ -9,6 +9,17 @@ public class Profile implements Comparable<Profile>{
         this.dob = dob;
     }
 
+    public String getfname(){
+        return fname;
+    }
+
+    public String getlname(){
+        return lname;
+    }
+
+    public Date getdob(){
+        return dob;
+    }
     //Override functions
     @Override
     public int compareTo(Profile other){

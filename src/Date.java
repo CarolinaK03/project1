@@ -1,7 +1,7 @@
 public class Date implements Comparable<Date> {
-    private int year;
-    private int month;
-    private int day;
+    private final int year;
+    private final int month;
+    private final int day;
 
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
@@ -62,11 +62,7 @@ public class Date implements Comparable<Date> {
     public boolean isLeap ( int year){
         if (year % QUADRENNIAL == 0) {
             if (year % CENTENNIAL == 0) {
-                if (year % QUARTERCENTENNIAL == 0) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return year % QUARTERCENTENNIAL == 0;
             } else {
                 return true;
             }
@@ -77,21 +73,16 @@ public class Date implements Comparable<Date> {
 
     @Override
     public int compareTo (Date other){
-        int compareMonth = this.month.compareTo(other.month); //returns -1,0,1
-        if (compareMonth != 0) {
-            return compareMonth;
+
+        if (this.year != other.year){
+            return this.year - other.year;
         }
 
-        // after compare by first names
-        int compareDay = this.day.compareTo(other.day);
-        if (compareDay != 0) {
-            return compareDay;
+        if (this.month != other.month){
+            return this.month - other.month;
         }
 
-        int compareYear = this.year.compareTo(other.year);
-        if (compareYear != 0) {
-            return compareYear;
-        }
+        return this.day - other.day;
     }
 
     @Override
@@ -100,11 +91,15 @@ public class Date implements Comparable<Date> {
     }
 
     @Override
-    public boolean equals(Object Obj) {
-        if (obj instanceof Date) {
-            Date other = (Date) obj;
-            return day == other.day && month == other.month && year == other.year;
-        }
-        else return false;
+    public boolean equals(Object obj) {
+        if ( obj == null ) return false;
+
+        if (! (obj instanceof Date other)) return false;
+
+        return this.day == other.day && this.month == other.month && this.year == other.year;
+
     }
+
+
+
 }
